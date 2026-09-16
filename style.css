@@ -1,0 +1,89 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background: #1c1e23;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  padding: 20px;
+}
+
+h1 { margin-bottom: 15px; }
+
+.stats {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.miner-box {
+  background: #2c2f36;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.hash-display {
+  font-family: monospace;
+  font-size: 14px;
+  color: #00ff88;
+  word-break: break-all;
+  margin-bottom: 10px;
+}
+
+.progress-bar-container {
+  height: 8px;
+  background: #3a3d46;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.progress-bar {
+  height: 100%;
+  background: #00ff88;
+  width: 0%;
+  transition: width 0.1s;
+}
+
+.status-text {
+  font-size: 14px;
+  color: #b0b0b0;
+}
+
+.tap-btn {
+  width: 100%;
+  padding: 18px;
+  font-size: 18px;
+  background: #ff563d;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.tap-btn:active { transform: scale(0.98); }
+.tap-btn.disabled { background: #555; cursor: not-allowed; }
+
+.controls { display: flex; flex-direction: column; gap: 10px; }
+.control-btn {
+  background: #3a3d46;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.control-btn:active { transform: scale(0.98); }
