@@ -3,7 +3,7 @@ tg.ready();
 
 // Инициализация данных
 let coins = parseInt(localStorage.getItem('mm_coins')) || 0;
-let difficulty = parseInt(localStorage.getItem('mm_difficulty')) || 1;
+let difficulty = parseInt(localStorage.getItem('mm_difficulty')) || 1; // начинаем с 1
 let passivePerSec = parseInt(localStorage.getItem('mm_passive')) || 0;
 
 const coinsEl = document.getElementById('coins');
@@ -36,9 +36,16 @@ function startMining() {
   statusText.textContent = 'Вычисление хеша...';
   hashDisplay.textContent = '--';
 
-  const target = Math.pow(10, difficulty); // порог для «успеха»
+  // Максимальное значение 8-символьного хеша в base36
+  const maxVal = Math.pow(36, 8);
+  // Порог: чем выше difficulty, тем меньше шанс успеха
+  // difficulty 1 → 10% успеха на попытку
+  // difficulty 2 → 1%
+  // difficulty 3 → 0.1%
+  const target = maxVal / Math.pow(10, difficulty);
+
   let attempts = 0;
-  const maxAttempts = 1000; // защита от зависания
+  const maxAttempts = 2000; // увеличили лимит попыток
 
   function attempt() {
     const hash = Math.random().toString(36).substring(2, 10);
@@ -58,17 +65,17 @@ function startMining() {
         hashDisplay.style.color = '#00ff88';
       } else {
         // Не нашли за лимит попыток
-        statusText.textContent = 'Не удалось найти подходящий хеш';
+        statusText.textContent = `Не удалось найти блок (попыток: ${attempts})`;
         hashDisplay.style.color = '#ff563d';
       }
       saveData();
-      // Возвращаем кнопку через 1.5 сек
+      // Возвращаем кнопку через 1.2 сек
       setTimeout(() => {
         tapBtn.classList.remove('disabled');
         progressBar.style.width = '0%';
         statusText.textContent = 'Готов к майнингу';
         hashDisplay.style.color = '';
-      }, 1500);
+      }, 1200);
       return;
     }
 
@@ -87,7 +94,7 @@ buyDifficultyBtn.addEventListener('click', () => {
     coins -= cost;
     difficulty++;
     saveData();
-    statusText.textContent = `Сложность повышена! Теперь майнить сложнее, но интереснее.`;
+    statusText.textContent = `Сложность повышена до ${difficulty}! Шанс успеха: ${(100 / Math.pow(10, difficulty)).toFixed(1)}% за клик`;
   } else {
     statusText.textContent = `Не хватает монет (нужно ${cost})`;
   }
