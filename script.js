@@ -3,7 +3,7 @@ tg.ready();
 
 // Инициализация данных
 let coins = parseInt(localStorage.getItem('mm_coins')) || 0;
-let difficulty = parseInt(localStorage.getItem('mm_difficulty')) || 5;
+let difficulty = parseInt(localStorage.getItem('mm_difficulty')) || 1;
 let passivePerSec = parseInt(localStorage.getItem('mm_passive')) || 0;
 
 const coinsEl = document.getElementById('coins');
